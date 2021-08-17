@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-      <h3 class="footer__title">HR Managment system</h3>
+      <h3 class="footer__title">School System</h3>
       <p class="footer__text">Powered by <a target="_blank" href="https://github.com/KamAkbar" class="footer__link link">Akbar</a></p>
   </footer>
 </template>

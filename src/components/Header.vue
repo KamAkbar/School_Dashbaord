@@ -1,10 +1,10 @@
 <template>
   <header class="header">
     <div class="container header-container">
-        <router-link to="/#" class="logo">Dashboard</router-link>
+        <router-link to="/" class="logo">Dashboard</router-link>
         <nav v-bind="isOpen ? 'active' : ''" class="nav">
-            <router-link to="/home" class="nav__item">Home</router-link>
-            <router-link to="/students" class="nav__item">Studenets</router-link>
+            <router-link to="/" class="nav__item">Home</router-link>
+            <router-link to="/employees" class="nav__item">Employees</router-link>
             <router-link to="/about" class="nav__item">About</router-link>
             <h4 @click="showNav()" class="close">+</h4>
         </nav>
