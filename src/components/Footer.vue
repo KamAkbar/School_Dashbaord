@@ -18,6 +18,7 @@ export default {
         background-color: #283044;
         padding: 40px 0 20px;
         color: #fff;
+
         &__link{
             color: #fff!important;
             border-radius: 80px;

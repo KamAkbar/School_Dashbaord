@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
     <router-view/>
   </div>
 </template>
@@ -18,6 +14,16 @@
   padding: 0;
   box-sizing: border-box;
 }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #283044;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #42b983;
+    border-radius: 50px;
+  }
 #app {
   font-family: 'Lato', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -30,6 +36,7 @@
     text-decoration: none;
     color: initial;
   }
+
 }
 }
 
