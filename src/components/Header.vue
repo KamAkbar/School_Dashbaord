@@ -47,7 +47,7 @@ export default {
         align-items: center;
         gap: 48px;
         &__item{
-            color: #ebf5ee!important;
+            color: hsl(138, 33%, 94%)!important;
             font-size: 20px;
             }
         }

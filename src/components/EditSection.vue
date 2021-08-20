@@ -98,36 +98,74 @@
       @click="save()"
       type="submit"
       class="add__submit mt-4 d-flex align-items-start"
-      value="Submit Form"
+      value="Update and Save"
     />
   </section>
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
-  name: "Add",
+  name: "EditSection",
   data() {
     return {
-      form: {
-          firstName: "",
-          lastName: "",
-          interesting: "",
-          studentClass: "",
-          gender: "",
-          dataOfBirth: "",
-      },
+      form: {},
+      perPage: 2,
+      currentPage: 2,
+      employees: null,
+      query: '',
     };
   },
+  async created() {
+    await this.$store.dispatch('LOAD_FROM_LOCALSTORAGE')
+    let index = this.$route.params.index
+    if (!/^\d+$/.test(index)) {
+      return this.$router.push('/404')
+    }
+    index = parseInt(index)
+    const items = this.$store.state.employees.items
+    const item = items[index]
+    if (!item) {
+      return this.$router.push('/404')
+    }
+    this.form = Object.assign({}, item)
+  },
   methods: {
-    save() {
-      this.$store.commit("getStudents", this.form);
-      console.log(this.$store.state.students);
-      this.$store.dispatch("saveDataToLocalStorage");
-      this.clearForm();
-    },
     clearForm() {
       this.form = {};
     },
+   async updateButton() {
+    this.$store.commit('UPDATE_ITEM', {
+    index: this.$route.params.index,
+    item: this.form,
+    })
+    await this.$store.dispatch('SAVE_TO_LOCALSTORAGE')
+    await this.$router.push('/employees')
+    },
+  },
+   computed: {
+    ...mapState({
+      students: s => s.employees.students,
+    }),
+    countMale() {
+      return this.students.filter(el => el.picked === 'male').length
+    },
+    countFemale() {
+      return this.students.filter(el => el.picked === 'female').length
+    },
+    countAccounting() {
+      return this.students.filter(el => el.selected === 'Math & Accounting').length
+    },
+    countIT() {
+      return this.students.filter(el => el.selected === 'IT').length
+    },
+    countMarketing() {
+      return this.students.filter(el => el.selected === 'sport').length
+    },
+  },
+  mounted() {
+    this.$store.dispatch('LOAD_FROM_LOCALSTORAGE')
   },
 };
 </script>
