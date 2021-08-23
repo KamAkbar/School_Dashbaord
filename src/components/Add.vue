@@ -1,11 +1,10 @@
 <template>
   <section class="add container">
-    <div class="add-forms">
+    <form action="">
+      <div class="add-forms">
       <div class="d-flex align-items-center">
         <div class="add-form mt-4 col-6 d-flex align-items-start flex-column">
-          <label for="" class="add__label"
-            >First Name</label
-          >
+          <label class="add__label">First Name</label>
           <input
             v-model="form.firstName"
             class="add__input col-11"
@@ -32,7 +31,7 @@
           <label for="" class="add__label"
             >Interesting</label
           >
-          <select v-model="form.interesting" class="add__input col-11">
+          <select v-model="form.interesting" class="add__input col-11" required>
             <option disabled selected>Choose</option>
             <option value="IT">IT</option>
             <option value="Sport">Sport</option>
@@ -65,6 +64,7 @@
               id="Male"
               class="add__check"
               value="Male"
+              required
             />
             <label for="" class="add__label">Male</label>
           </div>
@@ -76,6 +76,7 @@
               id="Female"
               class="add__check"
               value="Female"
+              required
             />
             <label for="" class="add__label">Female</label>
           </div>
@@ -100,6 +101,7 @@
       class="add__submit mt-4 d-flex align-items-start"
       value="Submit Form"
     />
+    </form>
   </section>
 </template>
 
@@ -120,14 +122,33 @@ export default {
   },
   methods: {
     save() {
-      this.$store.commit("getStudents", this.form);
-      console.log(this.$store.state.students);
-      this.$store.dispatch("saveDataToLocalStorage");
-      this.clearForm();
+      if (
+        this.form.firstName.length == 0 ||
+        this.form.lastName.length == 0 ||
+        this.form.interesting.length == 0 ||
+        this.form.studentClass.length == 0 ||
+        //this.form.gender.length == 0 ||
+        this.form.dataOfBirth.length == 0
+      ) {
+        console.log('Work');
+        alert('Fill the Empty Places');
+        return false;
+      } else {
+        this.$store.commit("getStudents", this.form);
+        console.log(this.$store.state.students);
+        this.$store.dispatch("saveDataToLocalStorage");
+        this.form = {}
+      }
     },
-    clearForm() {
-      this.form = {};
-    },
+    // save() {
+    //   this.$store.commit("getStudents", this.form);
+    //   console.log(this.$store.state.students);
+    //   this.$store.dispatch("saveDataToLocalStorage");
+    //   this.clearForm();
+    // },
+    // clearForm() {
+    //   this.form = {};
+    // },
   },
 };
 </script>
