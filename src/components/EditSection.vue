@@ -95,7 +95,7 @@
       </div>
     </div>
     <input
-      @click="save()"
+      @click="updateButton()"
       type="submit"
       class="add__submit mt-4 d-flex align-items-start"
       value="Update and Save"
@@ -139,7 +139,7 @@ export default {
    async updateButton() {
     this.$store.commit('UPDATE_ITEM', {
     index: this.$route.params.index,
-    item: this.form,
+    student: this.form,
     })
     await this.$store.dispatch('SAVE_TO_LOCALSTORAGE')
     await this.$router.push('/employees')

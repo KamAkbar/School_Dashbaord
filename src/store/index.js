@@ -20,9 +20,9 @@ export default new Vuex.Store({
         ADD_ITEM(state, item) {
             state.items.push(item)
         },
-        UPDATE_ITEM(state, { index, item }) {
-            if (state.items[index]) {
-                Object.assign(state.items[index], item)
+        UPDATE_ITEM(state, { index, student }) {
+            if (state.students[index]) {
+                Object.assign(state.students[index], student)
             }
         },
     },
