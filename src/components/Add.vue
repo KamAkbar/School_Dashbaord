@@ -9,6 +9,8 @@
             v-model="form.firstName"
             class="add__input col-11"
             type="text"
+            :class="{'error': $v.form.firstName.$error}"
+            @blur="$v.form.firstName.$touch"
             placeholder="Akbar"
             required
           />
@@ -20,6 +22,8 @@
           <input
             class="add__input col-11"
             type="text"
+            :class="{'error': $v.form.lastName.$error}"
+            @blur="$v.form.lastName.$touch"
             placeholder="Kamoldinov"
             required
             v-model="form.lastName"
@@ -31,7 +35,13 @@
           <label for="" class="add__label"
             >Interesting</label
           >
-          <select v-model="form.interesting" class="add__input col-11" required>
+          <select 
+            v-model="form.interesting"
+            class="add__input col-11" 
+            required
+            :class="{'error': $v.form.interesting.$error}"
+            @blur="$v.form.interesting.$touch"
+          >
             <option disabled selected>Choose</option>
             <option value="IT">IT</option>
             <option value="Sport">Sport</option>
@@ -46,6 +56,8 @@
             v-model="form.studentClass"
             class="add__input col-11"
             type="text"
+            :class="{'error': $v.form.studentClass.$error}"
+            @blur="$v.form.studentClass.$touch"
             placeholder="9A"
             required
           />
@@ -66,7 +78,7 @@
               value="Male"
               required
             />
-            <label for="" class="add__label">Male</label>
+            <label for="Male" class="add__label">Male</label>
           </div>
           <div class="form-check d-flex align-items-baseline gap-2">
             <input
@@ -78,7 +90,7 @@
               value="Female"
               required
             />
-            <label for="" class="add__label">Female</label>
+            <label for="Female" class="add__label">Female</label>
           </div>
         </div>
       </div>
@@ -87,6 +99,8 @@
           >Data of Birth</label
         >
         <input
+          :class="{'error': $v.form.dataOfBirth.$error}"
+          @blur="$v.form.dataOfBirth.$touch"
           v-model="form.dataOfBirth"
           class="add__input col-11"
           type="date"
@@ -106,6 +120,7 @@
 </template>
 
 <script>
+import { required } from 'vuelidate/lib/validators'
 export default {
   name: "Add",
   data() {
@@ -118,28 +133,36 @@ export default {
           gender: "",
           dataOfBirth: "",
       },
+   
     };
+
+  },
+  validations: {
+   form:{
+      firstName: {required,},
+      lastName: {required,},
+      interesting: {required,},
+      studentClass: {required,},
+      dataOfBirth: {required,},
+   }
   },
   methods: {
     save() {
+      this.$v.touch
       if (
-        this.form.firstName.length == 0 ||
-        this.form.lastName.length == 0 ||
-        this.form.interesting.length == 0 ||
-        this.form.studentClass.length == 0 ||
-        //this.form.gender.length == 0 ||
-        this.form.dataOfBirth.length == 0
+       !this.$v.form.firstName.$error
       ) {
-        console.log('Work');
-        alert('Fill the Empty Places');
-        return false;
-      } else {
-        this.$store.commit("getStudents", this.form);
-        console.log(this.$store.state.students);
+         this.$store.commit("getStudents", this.form);
         this.$store.dispatch("saveDataToLocalStorage");
         this.form = {}
-      }
+      } 
     },
+    // status(validation) {
+    //   return {
+    //   error: validation.$error,
+    //   dirty: validation.$dirty
+    //   }
+    // }
     // save() {
     //   this.$store.commit("getStudents", this.form);
     //   console.log(this.$store.state.students);
@@ -183,8 +206,23 @@ export default {
   }
   input:focus { 
     outline: none !important;
-    border-color: #719ECE;
-    box-shadow: 0 0 10px #719ECE;
+}
+.dirty {
+  border-color: #5A5;
+  background: #EFE;
+}
+
+.dirty:focus {
+  outline-color: #8E8;
+}
+
+.error {
+  border-color: red;
+  background: #FDD;
+}
+
+.error:focus {
+  outline-color: #F99;
 }
 }
 </style>
