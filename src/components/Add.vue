@@ -181,5 +181,10 @@ export default {
   .form-check {
     padding-left: 0;
   }
+  input:focus { 
+    outline: none !important;
+    border-color: #719ECE;
+    box-shadow: 0 0 10px #719ECE;
+}
 }
 </style>
