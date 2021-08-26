@@ -5,14 +5,21 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        students: []
+        students: [],
+        signs: []
     },
     mutations: {
         getStudents(state, student) {
             state.students.push(student)
         },
+        getSigns(state, sign) {
+            state.signs.push(sign)
+        },
         getStudentsState(state, student) {
             state.students = student
+        },
+        getSignState(state, sign) {
+            state.signs = sign
         },
         DELETE_ITEM(state, index) {
             state.students.splice(index, 1)
@@ -30,6 +37,10 @@ export default new Vuex.Store({
         saveDataToLocalStorage({state}) {
             const data = JSON.stringify(state.students)
             localStorage.setItem('students', data)
+        },
+        saveSignDataToLocalStorage({state}) {
+            const signData = JSON.stringify(state.signs)
+            localStorage.setItem('signs', signData)
         },
         loadDataToLocalStorage() {
             let data = JSON.parse(localStorage.getItem('students'))

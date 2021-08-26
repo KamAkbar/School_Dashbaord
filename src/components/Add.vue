@@ -72,6 +72,8 @@
             <input
               v-model="form.gender"
               type="radio"
+              :class="{'error': $v.form.gender.$error}"
+              @blur="$v.form.gender.$touch"
               name="Gender"
               id="Male"
               class="add__check"
@@ -84,6 +86,8 @@
             <input
               v-model="form.gender"
               type="radio"
+              :class="{'error': $v.form.gender.$error}"
+              @blur="$v.form.gender.$touch"
               name="Gender"
               id="Female"
               class="add__check"
@@ -144,6 +148,7 @@ export default {
       interesting: {required,},
       studentClass: {required,},
       dataOfBirth: {required,},
+      gender: {required,},
    }
   },
   methods: {
