@@ -18,7 +18,7 @@ export default new Vuex.Store({
         getStudentsState(state, student) {
             state.students = student
         },
-        getSignState(state, sign) {
+        getSignsState(state, sign) {
             state.signs = sign
         },
         DELETE_ITEM(state, index) {
@@ -47,6 +47,15 @@ export default new Vuex.Store({
 
             if(data) {
                 this.commit('getStudentsState', data)
+                
+            }
+        },
+        loadSignDataToLocalStorage() {
+            let signData = JSON.parse(localStorage.getItem('signs'))
+
+            if(signData) {
+                this.commit('getSignsState', signData)
+                console.log(signData)
             }
         },
         async LOAD_FROM_LOCALSTORAGE({commit}) {

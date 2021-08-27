@@ -402,12 +402,12 @@
                 <input type="checkbox" id="cb2" />
                 <label for="cb2">I want to receive the newsletter</label>
               </div>
-              <input
+              <router-link to="/#"><input
                 @click="signup()"
                 class="button"
                 type="submit"
                 value="Register"
-              />
+              /></router-link>
             </form>
             <p class="login">
               Already have an account?
@@ -455,6 +455,7 @@ export default {
         this.$store.commit("getSigns", this.sign);
         this.$store.dispatch("saveSignDataToLocalStorage");
         this.sign = {};
+        this.$router.push("#")
       }
     },
   },
