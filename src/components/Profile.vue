@@ -51,20 +51,20 @@
     </div>
     <!-- Time Tracker Table -->
     <div class="pcard-time mt-3 col-md-12 col-sm-12">
-    <table class="table table-responsive">
+    <table class="table table-responsive" style="overflow-x: auto">
         <thead>
             <th scope="col">Name</th>
-            <th scope="col">Team</th>
-            <th scope="col">Data</th>
+            <th scope="col" class="table__team">Team</th>
+            <th scope="col" class="table__date">Data</th>
             <th scope="col">Clock-In</th>
             <th scope="col">Clock-Out</th>
         </thead>
             <tr v-for="(sign, index) in signs" :key="index">
             <th scope="col"> <img src="https://i.pravatar.cc/40?img=67" alt="Profile Photo" class="pcard__avatar"/> </th>
-            <th scope="col"> {{ signs[0].team }} </th>
-            <th scope="col"> {{  currentDate() }} </th>
-            <th scope="col "> {{ signs[0].clockin }} </th>
-            <th scope="col "> {{ signs[0].clockout }} </th>
+            <th scope="col" class="table__team"> {{ signs[0].team }} </th>
+            <th scope="col" class="table__date"> {{  currentDate() }} </th>
+            <th scope="col" class="table__clockin"> {{ signs[0].clockin }} </th>
+            <th scope="col"> {{ signs[0].clockout }} </th>
     </tr>
     </table>
     <!-- <input type="submit" value="Add Time" class="pcard__submit d-flex align-items-start mt-5"> -->
@@ -194,5 +194,19 @@ export default {
       height: 150px;
     }
   }
+}
+@media (max-width: 495px) {
+    .table{
+        &__team{
+            display: none;
+        }
+    }
+}
+@media (max-width: 378px) {
+    .table{
+        &__date{
+            display: none;
+        }
+    }
 }
 </style>
