@@ -92,6 +92,30 @@
                   </div>
                 </div>
               </div>
+              <div class="row clearfix">
+                <div class="col_half">
+                  <div class="input_field d-flex flex-column ">
+                    <!-- <span><i aria-hidden="true" class="fa fa-user"></i></span> -->
+                    <label for="clockin">Clock-In</label>
+                    <input
+                      type="time"
+                      v-model="sign.clockin"
+                      name="clockin"
+                    />
+                  </div>
+                </div>
+                <div class="col_half">
+                  <div class="input_field d-flex flex-column ">
+                    <!-- <span><i aria-hidden="true" class="fa fa-user"></i></span> -->
+                    <label for="clockout">Clock-Out</label>
+                    <input
+                      type="time"
+                      v-model="sign.clockout"
+                      name="clockout"
+                    />
+                  </div>
+                </div>
+              </div>
               <div class="input_field radio_option">
                 <input
                   :class="{ error: $v.sign.signgender.$error }"
@@ -115,8 +139,20 @@
                 <label for="Male">Female</label>
               </div>
               <div class="input_field select_option">
+                <select v-model="sign.team" aria-placeholder="Select a team">
+                  <option value="" disabled selected>Select your option</option>
+                  <option value="Web Development">Web Development</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="UI/UX">UI/UX</option>
+                  <option value="3D Model">3D Model</option>
+                  <option value="Mobile Development">Mobile Development</option>
+                  <option value="Cyber Security">Cyber Security</option>
+                </select>
+                <div class="select_arrow"></div>
+              </div>
+              <div class="input_field select_option">
                 <select v-model="sign.country">
-                  <option>Select a country</option>
+                  <option disabled selected>Select a country</option>
                   <option value="Afganistan">Afghanistan</option>
                   <option value="Albania">Albania</option>
                   <option value="Algeria">Algeria</option>
@@ -434,6 +470,9 @@ export default {
         surname: "",
         signgender: "",
         country: "",
+        team: "",
+        clockin: "",
+        clockout: "",
       },
     };
   },
@@ -446,6 +485,9 @@ export default {
       surname: { required },
       signgender: { required },
       country: { required },
+      team: { required },
+      clockin: { required },
+      clockout: { required },
     },
   },
   methods: {

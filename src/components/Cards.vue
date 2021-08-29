@@ -110,6 +110,11 @@ export default {
         color: #000;
         padding: 20px;
         margin-top: 20px;
+        &:hover{
+            box-shadow: 12px 0px 24px rgba(16, 30, 115, 0.08);
+            background: #fff;
+            transition: .4s;
+        }
         &__img{
             width: 50px;
             height: 50px;
